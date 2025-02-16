@@ -17,3 +17,10 @@ function updateBlocks() {
     alert("Code ERROR: " + error);
   }
 }
+
+workspace.addChangeListener(function() {
+  const codebox = document.getElementById("codebox");
+  const code = Blockly.JavaScript.workspaceToCode(workspace);
+  
+  codebox.value = code;
+});
