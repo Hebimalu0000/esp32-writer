@@ -4,38 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Blockly - Arduino & ESP32</title>
-
-    <!-- Blockly本体 -->
-    <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
-    <script src="https://unpkg.com/blockly/dart_compressed.js"></script>
-    <script src="https://unpkg.com/@blockly/field-angle"></script>
-    <script>registerFieldAngle();</script>
-
-    <!-- ScratchBlocks風CSS
-    <link rel="stylesheet" href="blockly/scratch_blocks.css"> -->
-
-    <style>
-        html, body { height: 100%; margin: 0; }
-        #blocklyDiv { height: 480px; width: 100%; }
-    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/blockly@1.0.0/blockly_compressed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/blockly@1.0.0/blocks_compressed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/blockly@1.0.0/msg/js/en.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/blockly@1.0.0/javascript_compressed.min.js"></script>
 </head>
 
 <body>
 
     <h1>Blockly for Arduino & ESP32</h1>
 
-    <select id="boardSelect">
-        <option value="arduino">Arduino</option>
-        <option value="esp32">ESP32</option>
-    </select>
+    <div id="blocklyDiv" style="height: 350px; width: 800px;"></div>
 
-    <div id="blocklyDiv"></div>
+    <xml id="toolbox" style="display: none">
+      <block type="controls_if"></block>
+      <block type="controls_repeat_ext"></block>
+      <block type="math_number"></block>
+      <block type="text"></block>
+      <block type="text_print"></block>
+    </xml>
 
-    <button onclick="generateCode()">コード生成</button>
-    <pre id="codeOutput"></pre>
+    <textarea id="codebox" rows="10" cols="100"></textarea>
+    <button id="run">実行</button><br/>
 
-    <!-- Blocklyカスタムブロックとコード生成 -->
-    <script src="blocks/custom_blocks.js"></script>
     <script src="js/main.js"></script>
 
 </body>
