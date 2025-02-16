@@ -1,35 +1,19 @@
-// Blocklyワークスペースの初期化
-const workspace = Blockly.inject('blocklyDiv', {
-    toolbox: document.getElementById('toolbox'),
-    theme: Blockly.Themes.Classic
+const run = document.getElementById('run');
+const workspace = Blockly.inject("blocklyDiv", {
+  toolbox: document.getElementById("toolbox")
 });
 
-// 対応デバイスの選択
-const boardSelect = document.getElementById('boardSelect');
+run.addEventListener("click", updateBlocks);
 
-// setup用初期化コード生成ヘルパー
-let setupCode = new Set();
-function addSetup(code) {
-    setupCode.add(code);
-}
+function updateBlocks() {
+  const codebox = document.getElementById("codebox");
+  const code = Blockly.JavaScript.workspaceToCode(workspace);
 
-// コード生成
-function generateCode() {
-    const target = boardSelect.value;
-    const userCode = Blockly.JavaScript.workspaceToCode(workspace);
+  codebox.value = code;
 
-    // 共通ヘッダー
-    let header = `
-${target === 'esp32' ? '#include <WiFi.h>' : ''}
-void setup() {
-    Serial.begin(115200);
-    ${Array.from(setupCode).join("\n    ")}
-}
-void loop() {
-    ${userCode}
-}
-    `;
-
-    document.getElementById("codeOutput").textContent = header;
-    setupCode.clear(); // 初期化コードリセット
+  try {
+    eval(code);
+  } catch (error) {
+    alert("Code ERROR: " + error);
+  }
 }
