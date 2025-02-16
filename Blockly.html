@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blockly - Arduino & ESP32</title>
+
+    <!-- Blockly本体 -->
+    <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/dart_compressed.js"></script>
+    <script src="https://unpkg.com/@blockly/field-angle"></script>
+    <script>registerFieldAngle();</script>
+
+    <!-- ScratchBlocks風CSS
+    <link rel="stylesheet" href="blockly/scratch_blocks.css"> -->
+
+    <style>
+        html, body { height: 100%; margin: 0; }
+        #blocklyDiv { height: 480px; width: 100%; }
+    </style>
+</head>
+
+<body>
+
+    <h1>Blockly for Arduino & ESP32</h1>
+
+    <select id="boardSelect">
+        <option value="arduino">Arduino</option>
+        <option value="esp32">ESP32</option>
+    </select>
+
+    <div id="blocklyDiv"></div>
+
+    <button onclick="generateCode()">コード生成</button>
+    <pre id="codeOutput"></pre>
+
+    <!-- Blocklyカスタムブロックとコード生成 -->
+    <script src="blocks/custom_blocks.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
